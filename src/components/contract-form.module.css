@@ -1,0 +1,92 @@
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+  
+.legend {
+  font-weight: bold;
+  font-size: 18px;
+  color: #e9e9e9;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background-color: #e9e9e9;
+  border-radius: 8px;
+  color: black;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.radio {
+  margin-right: 0.3rem;
+}
+
+.fileNavigation {
+  display: flex; 
+  gap: 15px;
+}
+
+.fileInput {
+  font-size: 16px;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.button:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; 
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
