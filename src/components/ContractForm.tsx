@@ -70,12 +70,6 @@ export const ContractForm = () => {
           className={styles.input}
         />
         <input
-          name='person_short'
-          onChange={handleChange}
-          placeholder='ФИО инициалы'
-          className={styles.input}
-        />
-        <input
           name='person_action'
           onChange={handleChange}
           placeholder='Действует на основании'
