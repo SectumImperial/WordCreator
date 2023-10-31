@@ -51,33 +51,49 @@ export const ContractForm = () => {
     <form onSubmit={handleSubmit} className={styles.form}>
       <fieldset className={styles.fieldset}>
         <legend className={styles.legend}>Основная информация</legend>
-        <input
-          name='company_name_full'
-          onChange={handleChange}
-          placeholder='Полное название компании'
-          className={styles.input}
-        />
-        <input
-          name='company_name_short'
-          onChange={handleChange}
-          placeholder='Краткое название компании'
-          className={styles.input}
-        />
-        <input
-          name='person_full'
-          onChange={handleChange}
-          placeholder='ФИО полностью'
-          className={styles.input}
-        />
-        <input
-          name='person_action'
-          onChange={handleChange}
-          placeholder='Действует на основании'
-          className={styles.input}
-        />
+
+        <label className={styles.label}>
+          Полное название компании
+          <input
+            name='company_name_full'
+            onChange={handleChange}
+            placeholder='Полное название компании'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          Краткое название компании
+          <input
+            name='company_name_short'
+            onChange={handleChange}
+            placeholder='Краткое название компании'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          ФИО полностью
+          <input
+            name='person_full'
+            onChange={handleChange}
+            placeholder='ФИО полностью'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          Действует на основании
+          <input
+            name='person_action'
+            onChange={handleChange}
+            placeholder='Действует на основании'
+            className={styles.input}
+          />
+        </label>
+
         <div className={styles.radioGroup}>
-          Пол:
-          <label>
+          <label className={styles.radioLabel}>
             <input
               type='radio'
               name='gender'
@@ -87,7 +103,7 @@ export const ContractForm = () => {
             />
             Мужской
           </label>
-          <label>
+          <label className={styles.radioLabel}>
             <input
               type='radio'
               name='gender'
@@ -98,96 +114,144 @@ export const ContractForm = () => {
             Женский
           </label>
         </div>
-        <input
-          name='position'
-          onChange={handleChange}
-          placeholder='Должность'
-          className={styles.input}
-        />
+
+        <label className={styles.label}>
+          Должность
+          <input
+            name='position'
+            onChange={handleChange}
+            placeholder='Должность'
+            className={styles.input}
+          />
+        </label>
       </fieldset>
 
       <fieldset className={styles.fieldset}>
         <legend className={styles.legend}>Финансовая информация</legend>
-        <input
-          type='number'
-          name='INN'
-          onChange={handleChange}
-          placeholder='ИНН'
-          className={styles.input}
-        />
-        <input
-          type='number'
-          name='KPP'
-          onChange={handleChange}
-          placeholder='КПП'
-          className={styles.input}
-        />
-        <input
-          type='number'
-          name='BIC'
-          onChange={handleChange}
-          placeholder='БИК'
-          className={styles.input}
-        />
-        <input
-          type='number'
-          name='OGRN'
-          onChange={handleChange}
-          placeholder='ОГРН'
-          className={styles.input}
-        />
-        <input
-          name='Bank'
-          onChange={handleChange}
-          placeholder='Банк'
-          className={styles.input}
-        />
-        <input
-          type='number'
-          name='rs'
-          onChange={handleChange}
-          placeholder='Р.С'
-          className={styles.input}
-        />
-        <input
-          type='number'
-          name='ks'
-          onChange={handleChange}
-          placeholder='К.С'
-          className={styles.input}
-        />
-        <input
-          name='email'
-          type='email'
-          onChange={handleChange}
-          placeholder='email'
-          className={styles.input}
-        />
+
+        <label className={styles.label}>
+          ИНН
+          <input
+            type='number'
+            name='INN'
+            onChange={handleChange}
+            placeholder='ИНН'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          КПП
+          <input
+            type='number'
+            name='KPP'
+            onChange={handleChange}
+            placeholder='КПП'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          БИК
+          <input
+            type='number'
+            name='BIC'
+            onChange={handleChange}
+            placeholder='БИК'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          ОГРН
+          <input
+            type='number'
+            name='OGRN'
+            onChange={handleChange}
+            placeholder='ОГРН'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          Банк
+          <input
+            name='Bank'
+            onChange={handleChange}
+            placeholder='Банк'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          Р.С
+          <input
+            type='number'
+            name='rs'
+            onChange={handleChange}
+            placeholder='Р.С'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          К.С
+          <input
+            type='number'
+            name='ks'
+            onChange={handleChange}
+            placeholder='К.С'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          Email
+          <input
+            name='email'
+            type='email'
+            onChange={handleChange}
+            placeholder='email'
+            className={styles.input}
+          />
+        </label>
       </fieldset>
 
       <fieldset className={styles.fieldset}>
         <legend className={styles.legend}>Сроки и суммы</legend>
-        <input
-          type='number'
-          name='project_days'
-          onChange={handleChange}
-          placeholder='Срок выполнения услуг (дней)'
-          className={styles.input}
-        />
-        <input
-          type='number'
-          name='total_amount'
-          onChange={handleChange}
-          placeholder='Сумма за услуги полностью'
-          className={styles.input}
-        />
-        <input
-          type='number'
-          name='imprest_amount'
-          onChange={handleChange}
-          placeholder='Аванс'
-          className={styles.input}
-        />
+
+        <label className={styles.label}>
+          Срок выполнения услуг (дней)
+          <input
+            type='number'
+            name='project_days'
+            onChange={handleChange}
+            placeholder='Срок выполнения услуг (дней)'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          Сумма за услуги полностью
+          <input
+            type='number'
+            name='total_amount'
+            onChange={handleChange}
+            placeholder='Сумма за услуги полностью'
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          Аванс
+          <input
+            type='number'
+            name='imprest_amount'
+            onChange={handleChange}
+            placeholder='Аванс'
+            className={styles.input}
+          />
+        </label>
       </fieldset>
 
       <div className={styles.fileNavigation}>

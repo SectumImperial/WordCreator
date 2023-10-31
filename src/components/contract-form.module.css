@@ -90,3 +90,14 @@
   visibility: visible;
   opacity: 1;
 }
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.radioLabel {
+  cursor: pointer;
+}
