@@ -205,7 +205,6 @@ export const ContractForm = () => {
           <input
             type='text'
             name='INN'
-            value={formData.INN}
             onChange={handleChange}
             placeholder='1234567890'
             className={

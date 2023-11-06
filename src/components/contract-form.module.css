@@ -30,6 +30,17 @@
   color: black;
 }
 
+.inputError {
+  color: #d32f2f; 
+  font-size: 0.75rem; 
+  margin-top: 0.25rem;
+  display: block; 
+}
+
+.errorMsg {
+  color: red;
+}
+
 .radioGroup {
   display: flex;
   gap: 10px;
