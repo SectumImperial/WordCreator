@@ -130,7 +130,7 @@ export const ContractForm = () => {
           <span>Дата</span>
           <input
             type='date'
-            name='person_action'
+            name='date'
             onChange={handleChange}
             placeholder='ДД/ММ/ГГГГ'
             className={styles.input}
@@ -142,7 +142,7 @@ export const ContractForm = () => {
           <span>Название объекта</span>
           <input
             type='text'
-            name='person_action'
+            name='object_name'
             onChange={handleChange}
             placeholder='Жилой дом'
             className={styles.input}
@@ -154,9 +154,9 @@ export const ContractForm = () => {
           <span>Адрес объекта</span>
           <input
             type='text'
-            name='person_action'
+            name='object_address'
             onChange={handleChange}
-            placeholder='Устава'
+            placeholder='Москва, ул. Пушкина, дом Колотушкина 6'
             className={styles.input}
             required
           />
