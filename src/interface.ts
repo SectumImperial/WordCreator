@@ -20,3 +20,12 @@ export interface FormData {
   remaining_amount?: number;
   acting_word?: 'действующего' | 'действующая';
 }
+
+export type FormErrors = {
+  INN?: string;
+  KPP?: string;
+  BIC?: string;
+  OGRN?: string;
+  rs?: string;
+  ks?: string;
+};
