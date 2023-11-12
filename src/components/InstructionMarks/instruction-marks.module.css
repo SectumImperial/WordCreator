@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    background-color: #f9f9f9; 
+    border-radius: 8px; 
+    padding: 20px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    max-width: 400px; 
+  }
+  
+  .header {
+    color: #333; 
+    margin-bottom: 16px; 
+  }
+  
+  .description {
+    font-weight: bold; 
+    color: #555;
+    margin-top: 10px; 
+  }
+  
+  .codeMark {
+    background-color: #eef;
+    border-radius: 4px;
+    padding: 2px 4px; 
+    font-family: monospace; 
+  }
+  
+  .definition {
+    margin-top: 7px;
+    margin-left: 15px; 
+    color: #666; 
+  }

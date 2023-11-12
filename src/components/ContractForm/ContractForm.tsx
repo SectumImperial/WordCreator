@@ -104,11 +104,33 @@ export const ContractForm = () => {
         </label>
 
         <label className={styles.label}>
+          <span>Юридический адрес компании</span>
+          <input
+            name='company_address'
+            onChange={handleChange}
+            placeholder='232432, Москва, ул. Пушкина, дом Колотушкина 6'
+            className={styles.input}
+            required
+          />
+        </label>
+
+        <label className={styles.label}>
+          <span>Почтовый адрес компании</span>
+          <input
+            name='company_post_address'
+            onChange={handleChange}
+            placeholder='121213, Москва, ул. Пушкина, дом Колотушкина 6'
+            className={styles.input}
+            required
+          />
+        </label>
+
+        <label className={styles.label}>
           <span>ФИО полностью</span>
           <input
             name='person_full'
             onChange={handleChange}
-            placeholder='Кабанова Кабана Кабановича'
+            placeholder='Кабанов Кабан Кабанович'
             className={styles.input}
             required
           />
@@ -130,7 +152,7 @@ export const ContractForm = () => {
           <span>Дата</span>
           <input
             type='date'
-            name='date'
+            name='contract_date'
             onChange={handleChange}
             placeholder='ДД/ММ/ГГГГ'
             className={styles.input}
@@ -204,7 +226,7 @@ export const ContractForm = () => {
           <span>ИНН</span>
           <input
             type='text'
-            name='INN'
+            name='inn'
             onChange={handleChange}
             placeholder='1234567890'
             className={
@@ -218,7 +240,7 @@ export const ContractForm = () => {
           <span>КПП</span>
           <input
             type='text'
-            name='KPP'
+            name='kpp'
             onChange={handleChange}
             placeholder='123456789'
             className={
@@ -232,7 +254,7 @@ export const ContractForm = () => {
           <span>БИК</span>
           <input
             type='number'
-            name='BIC'
+            name='bic'
             onChange={handleChange}
             placeholder='БИК'
             className={
@@ -246,7 +268,7 @@ export const ContractForm = () => {
           <span>ОГРН</span>
           <input
             type='number'
-            name='OGRN'
+            name='ogrn'
             onChange={handleChange}
             placeholder='ОГРН'
             className={
@@ -259,7 +281,7 @@ export const ContractForm = () => {
         <label className={styles.label}>
           <span>Банк</span>
           <input
-            name='Bank'
+            name='bank'
             onChange={handleChange}
             placeholder='Банк'
             className={styles.input}
