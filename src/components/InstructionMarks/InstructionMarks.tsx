@@ -41,6 +41,22 @@ const marksInstructions = [
   { mark: '{object_name}', instruction: 'Введите имя объекта.' },
   { mark: '{object_address}', instruction: 'Введите адрес объекта.' },
   { mark: '{contract_date}', instruction: 'Укажите дату.' },
+  {
+    mark: '{total_amount_word}',
+    instruction: 'Словесное обозначение общей суммы за услуги.',
+  },
+  {
+    mark: '{imprest_amount_word}',
+    instruction: 'Словесное обозначение суммы аванса.',
+  },
+  {
+    mark: '{remaining_amount_word}',
+    instruction: 'Словесное обозначение остатка аванса.',
+  },
+  {
+    mark: '{project_days_word}',
+    instruction: 'Словесное обозначение срока выполнения услуг в днях.',
+  },
 ];
 
 export const InstructionMarks = () => {

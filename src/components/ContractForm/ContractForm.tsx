@@ -1,5 +1,7 @@
-/* eslint-disable indent */
+/* eslint-disable prettier/prettier */
+// eslint-disable-next-line import/no-duplicates
 import { format } from 'date-fns';
+// eslint-disable-next-line import/no-duplicates
 import { ru } from 'date-fns/locale';
 import { useState, ChangeEvent, MouseEvent, FormEvent, useEffect } from 'react';
 import { downloadWordFile } from '@/utils/downLoadWordFile';
@@ -62,26 +64,26 @@ export const ContractForm = ({ parsedData }: ContractFormProps) => {
   const validateField = (name: string, value: string) => {
     let errorMsg = '';
     switch (name) {
-      case 'inn':
-        errorMsg = /^\d{10}$/.test(value) ? '' : 'ИНН должен содержать 10 цифр';
-        break;
-      case 'kpp':
-        errorMsg = /^\d{9}$/.test(value) ? '' : 'КПП должен содержать 9 цифр';
-        break;
-      case 'bic':
-        errorMsg = /^\d{9}$/.test(value) ? '' : 'БИК должен содержать 9 цифр';
-        break;
-      case 'ogrn':
-        errorMsg = /^\d{13}$/.test(value)
-          ? ''
-          : 'ОГРН должен содержать 13 цифр';
-        break;
-      case 'rs':
-      case 'ks':
-        errorMsg = /^\d{20}$/.test(value)
-          ? ''
-          : 'Счет должен содержать 20 цифр';
-        break;
+    case 'inn':
+      errorMsg = /^\d{10}$/.test(value) ? '' : 'ИНН должен содержать 10 цифр';
+      break;
+    case 'kpp':
+      errorMsg = /^\d{9}$/.test(value) ? '' : 'КПП должен содержать 9 цифр';
+      break;
+    case 'bic':
+      errorMsg = /^\d{9}$/.test(value) ? '' : 'БИК должен содержать 9 цифр';
+      break;
+    case 'ogrn':
+      errorMsg = /^\d{13}$/.test(value)
+        ? ''
+        : 'ОГРН должен содержать 13 цифр';
+      break;
+    case 'rs':
+    case 'ks':
+      errorMsg = /^\d{20}$/.test(value)
+        ? ''
+        : 'Счет должен содержать 20 цифр';
+      break;
     }
     setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMsg }));
   };

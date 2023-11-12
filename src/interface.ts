@@ -20,9 +20,13 @@ export interface FormData {
   ks?: number | string;
   email?: string;
   project_days?: number | string;
+  project_days_word?: string;
   total_amount?: number | string;
   imprest_amount?: number | string;
   remaining_amount?: number | string;
+  total_amount_word?: string;
+  imprest_amount_word?: string;
+  remaining_amount_word?: string;
   acting_word?: 'действующего' | 'действующая';
 }
 

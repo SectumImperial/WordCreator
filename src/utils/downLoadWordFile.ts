@@ -2,6 +2,7 @@ import PizZip from 'pizzip';
 import Docxtemplater from 'docxtemplater';
 import { FormData } from '@/interface';
 import { getShortName } from './getShortName';
+import { numberToWordsRU } from './numberToWord';
 
 export const downloadWordFile = async (
   formData: FormData,
@@ -32,7 +33,31 @@ export const downloadWordFile = async (
 
     if (formData.total_amount && formData.imprest_amount) {
       formData['remaining_amount'] =
-        formData.total_amount - formData.imprest_amount;
+        Number(formData.total_amount) - Number(formData.imprest_amount);
+    }
+
+    if (formData.total_amount) {
+      formData['total_amount_word'] = numberToWordsRU(
+        Number(formData.total_amount)
+      );
+    }
+
+    if (formData.remaining_amount) {
+      formData['remaining_amount_word'] = numberToWordsRU(
+        Number(formData.remaining_amount)
+      );
+    }
+
+    if (formData.imprest_amount) {
+      formData['imprest_amount_word'] = numberToWordsRU(
+        Number(formData.imprest_amount)
+      );
+    }
+
+    if (formData.project_days) {
+      formData['project_days_word'] = numberToWordsRU(
+        Number(formData.project_days)
+      );
     }
 
     if (formData.gender === 'male') {
