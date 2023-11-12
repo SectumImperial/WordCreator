@@ -1,6 +1,6 @@
 # WordCreator
 Create templates of the word document
-Demo https://word-creator-n3wepjs72-maxims-projects-9551198f.vercel.app/
+Demo https://word-creator-70w1vtknl-maxims-projects-9551198f.vercel.app/
 
 - {company_name_full} для полного названия компании
 - {company_name_short} для краткого названия компании
