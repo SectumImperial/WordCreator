@@ -1,0 +1,34 @@
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.button:hover {
+  background-color: #006adb;
+  color: #fff; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
+.button:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+  box-shadow: none; 
+}
+
+.button:disabled:hover {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #0056b3;
+}

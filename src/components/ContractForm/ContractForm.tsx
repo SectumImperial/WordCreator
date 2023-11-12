@@ -1,46 +1,77 @@
 /* eslint-disable indent */
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
+import { useState, ChangeEvent, MouseEvent, FormEvent, useEffect } from 'react';
 import { downloadWordFile } from '@/utils/downLoadWordFile';
-import { FormData, FormErrors } from '@/interface';
+import { FormData, FormErrors, ParsedData } from '@/interface';
+import { Button } from '@/components/';
 import styles from './contract-form.module.css';
 
-export const ContractForm = () => {
-  const [formData, setFormData] = useState<FormData>({
-    company_name_full: 'string',
-    company_name_short: 'string',
-    person_full: 'string',
-    person_short: 'string',
-    person_action: 'string',
-    gender: 'male',
-    position: 'string',
-    INN: 1234567890,
-    KPP: 123456789,
-    BIC: 23,
-    OGRN: 23,
-    Bank: 'string',
-    rs: 23,
-    ks: 23,
-    email: 'string',
-    project_days: 23,
-    total_amount: 23,
-    imprest_amount: 23,
-  });
+interface ContractFormProps {
+  parsedData: ParsedData;
+}
+
+const initialFormData = {
+  contract_date: '',
+  company_post_address: '',
+  company_name_full: '',
+  company_name_short: '',
+  person_full: '',
+  person_short: '',
+  person_action: '',
+  position: '',
+  inn: '',
+  kpp: '',
+  bic: '',
+  ogrn: '',
+  bank: '',
+  rs: '',
+  ks: '',
+  email: '',
+  project_days: '',
+  total_amount: '',
+  imprest_amount: '',
+  object_address: '',
+  object_name: '',
+  company_address: '',
+};
+
+export const ContractForm = ({ parsedData }: ContractFormProps) => {
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      company_name_full:
+        parsedData.company_name_full || prevData.company_name_full,
+      person_full: parsedData.person_full || prevData.person_full,
+      person_action: parsedData.person_action || prevData.person_action,
+      position: parsedData.position || prevData.position,
+      inn: parsedData.inn || prevData.inn,
+      kpp: parsedData.kpp || prevData.kpp,
+      ogrn: parsedData.ogrn || prevData.ogrn,
+      bic: parsedData.bic || prevData.bic,
+      rs: parsedData.rs || prevData.rs,
+      ks: parsedData.ks || prevData.ks,
+      email: parsedData.email || prevData.email,
+    }));
+  }, [parsedData]);
 
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<FormErrors>({});
   const validateField = (name: string, value: string) => {
     let errorMsg = '';
     switch (name) {
-      case 'INN':
+      case 'inn':
         errorMsg = /^\d{10}$/.test(value) ? '' : 'ИНН должен содержать 10 цифр';
         break;
-      case 'KPP':
+      case 'kpp':
         errorMsg = /^\d{9}$/.test(value) ? '' : 'КПП должен содержать 9 цифр';
         break;
-      case 'BIC':
+      case 'bic':
         errorMsg = /^\d{9}$/.test(value) ? '' : 'БИК должен содержать 9 цифр';
         break;
-      case 'OGRN':
+      case 'ogrn':
         errorMsg = /^\d{13}$/.test(value)
           ? ''
           : 'ОГРН должен содержать 13 цифр';
@@ -58,6 +89,7 @@ export const ContractForm = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     validateField(name, value);
+    console.log(name, value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -71,9 +103,22 @@ export const ContractForm = () => {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (
+    e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
-    downloadWordFile(formData, file);
+    const dataForDownload = { ...formData };
+
+    if (dataForDownload.contract_date) {
+      dataForDownload.contract_date = format(
+        new Date(dataForDownload.contract_date),
+        'dd MMMM yyyy года',
+        { locale: ru }
+      );
+    }
+    downloadWordFile(dataForDownload, file);
+    setFormData(initialFormData);
+    setFile(null);
   };
 
   return (
@@ -85,6 +130,7 @@ export const ContractForm = () => {
           <span>Полное название компании</span>
           <input
             name='company_name_full'
+            value={formData.company_name_full}
             onChange={handleChange}
             placeholder='Общество с ограниченной ответсвтенностью "Рога и Копыта"'
             className={styles.input}
@@ -96,6 +142,7 @@ export const ContractForm = () => {
           <span>Краткое название компании</span>
           <input
             name='company_name_short'
+            value={formData.company_name_short}
             onChange={handleChange}
             placeholder='ООО "Рога и Копыта'
             className={styles.input}
@@ -107,6 +154,7 @@ export const ContractForm = () => {
           <span>Юридический адрес компании</span>
           <input
             name='company_address'
+            value={formData.company_address}
             onChange={handleChange}
             placeholder='232432, Москва, ул. Пушкина, дом Колотушкина 6'
             className={styles.input}
@@ -118,6 +166,7 @@ export const ContractForm = () => {
           <span>Почтовый адрес компании</span>
           <input
             name='company_post_address'
+            value={formData.company_post_address}
             onChange={handleChange}
             placeholder='121213, Москва, ул. Пушкина, дом Колотушкина 6'
             className={styles.input}
@@ -129,6 +178,7 @@ export const ContractForm = () => {
           <span>ФИО полностью</span>
           <input
             name='person_full'
+            value={formData.person_full}
             onChange={handleChange}
             placeholder='Кабанов Кабан Кабанович'
             className={styles.input}
@@ -141,6 +191,7 @@ export const ContractForm = () => {
           <input
             type='text'
             name='person_action'
+            value={formData.person_action}
             onChange={handleChange}
             placeholder='Устава'
             className={styles.input}
@@ -153,6 +204,7 @@ export const ContractForm = () => {
           <input
             type='date'
             name='contract_date'
+            value={formData.contract_date}
             onChange={handleChange}
             placeholder='ДД/ММ/ГГГГ'
             className={styles.input}
@@ -165,6 +217,7 @@ export const ContractForm = () => {
           <input
             type='text'
             name='object_name'
+            value={formData.object_name}
             onChange={handleChange}
             placeholder='Жилой дом'
             className={styles.input}
@@ -177,6 +230,7 @@ export const ContractForm = () => {
           <input
             type='text'
             name='object_address'
+            value={formData.object_address}
             onChange={handleChange}
             placeholder='Москва, ул. Пушкина, дом Колотушкина 6'
             className={styles.input}
@@ -211,6 +265,7 @@ export const ContractForm = () => {
           <span>Должность</span>
           <input
             name='position'
+            value={formData.position}
             onChange={handleChange}
             placeholder='Директор'
             className={styles.input}
@@ -227,6 +282,7 @@ export const ContractForm = () => {
           <input
             type='text'
             name='inn'
+            value={formData.inn}
             onChange={handleChange}
             placeholder='1234567890'
             className={
@@ -241,6 +297,7 @@ export const ContractForm = () => {
           <input
             type='text'
             name='kpp'
+            value={formData.kpp}
             onChange={handleChange}
             placeholder='123456789'
             className={
@@ -255,6 +312,7 @@ export const ContractForm = () => {
           <input
             type='number'
             name='bic'
+            value={formData.bic}
             onChange={handleChange}
             placeholder='БИК'
             className={
@@ -269,6 +327,7 @@ export const ContractForm = () => {
           <input
             type='number'
             name='ogrn'
+            value={formData.ogrn}
             onChange={handleChange}
             placeholder='ОГРН'
             className={
@@ -283,6 +342,7 @@ export const ContractForm = () => {
           <input
             name='bank'
             onChange={handleChange}
+            value={formData.bank}
             placeholder='Банк'
             className={styles.input}
             required
@@ -294,6 +354,7 @@ export const ContractForm = () => {
           <input
             type='number'
             name='rs'
+            value={formData.rs}
             onChange={handleChange}
             placeholder='12345678901234567890'
             className={
@@ -308,6 +369,7 @@ export const ContractForm = () => {
           <input
             type='number'
             name='ks'
+            value={formData.ks}
             onChange={handleChange}
             placeholder='12345678901234567890'
             className={
@@ -322,6 +384,7 @@ export const ContractForm = () => {
           <input
             name='email'
             type='email'
+            value={formData.email}
             onChange={handleChange}
             placeholder='email'
             className={styles.input}
@@ -339,6 +402,7 @@ export const ContractForm = () => {
             type='number'
             name='project_days'
             onChange={handleChange}
+            value={formData.project_days}
             placeholder='Срок выполнения услуг (дней)'
             className={styles.input}
             required
@@ -350,6 +414,7 @@ export const ContractForm = () => {
           <input
             type='number'
             name='total_amount'
+            value={formData.total_amount}
             onChange={handleChange}
             placeholder='Сумма за услуги полностью'
             className={styles.input}
@@ -362,6 +427,7 @@ export const ContractForm = () => {
           <input
             type='number'
             name='imprest_amount'
+            value={formData.imprest_amount}
             onChange={handleChange}
             placeholder='Аванс'
             className={styles.input}
@@ -378,9 +444,11 @@ export const ContractForm = () => {
           required
         />
         <div className={styles.tooltip}>
-          <button type='submit' disabled={!file} className={styles.button}>
-            <span>Создать документ</span>
-          </button>
+          <Button
+            text='Создать документ'
+            handler={handleSubmit}
+            disabled={!file}
+          />
           {!file && (
             <span className={styles.tooltiptext}>
               <span>Загрузите файл для активации</span>

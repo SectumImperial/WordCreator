@@ -1,23 +1,16 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, Dispatch, SetStateAction, FC } from 'react';
+import { Button } from '@/components/';
 import styles from './data-field.module.css';
+import { ParsedData } from '@/interface';
 
-interface ParsedData {
-  position?: string;
-  action?: string;
-  fullName?: string;
-  companyName?: string;
-  inn?: string;
-  kpp?: string;
-  ogrn?: string;
-  bic?: string;
-  rs?: string;
-  ks?: string;
-  email?: string;
+interface DataFieldProps {
+  setParsedData: Dispatch<SetStateAction<ParsedData>>;
 }
+
 const regexPatterns = {
-  fullName:
+  person_full:
     /(?:ФИО|Директор|Имя)[^\wА-ЯЁа-яё]*([А-ЯЁ][а-яё]+)\s+([А-ЯЁ][а-яё]+)\s+([А-ЯЁ][а-яё]+)/,
-  companyName:
+  company_name_full:
     /\b(ООО|Общество\s+с\s+ограниченной\s+ответственностью)[\s\S]*?«([^»]+)»/,
   inn: /\s?ИНН[\s\S]*?(\d{10}|\d{12})/,
   kpp: /\s?КПП[\s\S]*?(\d{9})/,
@@ -29,31 +22,25 @@ const regexPatterns = {
   email: /\b[Ee]-?[Mm]ail[\s\S]*?([\w.-]+@[\w.-]+\.\w+)\b/,
   position:
     /\b(директора?|генерального\sдиректора?|генеральный\sдиректор)[\s\S]*?\b/i,
-  action: /\b(устава?|устав)\b/i,
+  person_action: /\b(устава?|устав)\b/i,
 };
 
-export const DataField = () => {
+export const DataField: FC<DataFieldProps> = ({ setParsedData }) => {
   const [inputText, setInputText] = useState('');
-  const [parsedData, setParsedData] = useState<ParsedData>({
-    position: 'Директор',
-    action: 'Устава',
-  });
 
-  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const text = event.target.value;
-    setInputText(text);
-    parseText(text);
+  const handleTextChange = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    parseText(inputText);
   };
 
   const parseText = (text: string) => {
-    const results: ParsedData = { ...parsedData };
+    const results: ParsedData = {};
 
     const combinedMatch = text.match(regexPatterns.combinedInnKpp);
     if (combinedMatch) {
       results['inn'] = combinedMatch[1];
       results['kpp'] = combinedMatch[2];
     } else {
-      // Обрабатываем ИНН и КПП отдельно
       const innMatch = text.match(regexPatterns.inn);
       if (innMatch) {
         results['inn'] = innMatch[1];
@@ -64,12 +51,11 @@ export const DataField = () => {
       }
     }
 
-    // Обработка остальных полей
     for (const [key, pattern] of Object.entries(regexPatterns)) {
       if (key !== 'inn' && key !== 'kpp' && key !== 'combinedInnKpp') {
         const match = text.match(pattern);
         if (match) {
-          if (key === 'fullName' && match[1] && match[2] && match[3]) {
+          if (key === 'person_full' && match[1] && match[2] && match[3]) {
             results[key as keyof ParsedData] =
               `${match[1]} ${match[2]} ${match[3]}`.trim();
           } else if (match[1]) {
@@ -80,9 +66,7 @@ export const DataField = () => {
     }
 
     results.position = results.position || 'Директор';
-    results.action = results.action || 'Устава';
-
-    console.log(results);
+    results.person_action = results.person_action || 'Устава';
     setParsedData(results);
   };
 
@@ -94,8 +78,9 @@ export const DataField = () => {
         cols={55}
         rows={25}
         value={inputText}
-        onChange={handleTextChange}
+        onChange={(e) => setInputText(e.target.value)}
       />
+      <Button text='Разобрать текст' handler={handleTextChange} />
     </div>
   );
 };
