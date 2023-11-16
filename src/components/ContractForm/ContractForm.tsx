@@ -114,7 +114,7 @@ export const ContractForm = ({ parsedData }: ContractFormProps) => {
     if (dataForDownload.contract_date) {
       dataForDownload.contract_date = format(
         new Date(dataForDownload.contract_date),
-        'dd MMMM yyyy года',
+        '«dd» MMMM yyyy г.',
         { locale: ru }
       );
     }
